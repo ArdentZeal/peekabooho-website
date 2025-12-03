@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peekabooho - Official Website</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Applying the new custom color palette */
+        :root {
+            --color-primary: #457B9D; /* Deep Teal - for links and main text accents */
+            --color-secondary: #E87679; /* Sunset Salmon - for CTAs/highlights */
+            --color-brand-name: #4D4D99; /* Rich Indigo - for Peekabooho name */
+            --color-background: #B7E4F2; /* Soft Sky Blue - main body background */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background);
+        }
+        /* Custom styling for the header/footer */
+        .app-header {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .app-container {
+            min-height: calc(100vh - 8rem); /* Adjust for header/footer height */
+        }
+        /* Custom buttons for a better mobile feel */
+        .store-button {
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+        .link-style {
+            color: var(--color-primary);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Bar -->
+    <header class="app-header bg-white sticky top-0 z-10">
+        <nav class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-black text-gray-900">
+                <span style="color: var(--color-brand-name);">Peekabooho</span>
+            </h1>
+            <!-- Updated Navigation Links -->
+            <div class="flex space-x-4 text-sm font-semibold">
+                <a href="#/" class="text-gray-600 hover:text-[var(--color-primary)] transition">Home</a>
+                <a href="#/contact" class="text-gray-600 hover:text-[var(--color-primary)] transition">Contact</a>
+                <a href="#/privacy" class="text-gray-600 hover:text-[var(--color-primary)] transition">Privacy</a>
+                <a href="#/terms" class="text-gray-600 hover:text-[var(--color-primary)] transition">Terms</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container (Where the SPA content renders) -->
+    <main id="app-content" class="app-container max-w-4xl mx-auto p-4 md:p-8"></main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="max-w-4xl mx-auto text-center text-sm">
+            <p>&copy; 2026 Matthias Weidemann. All Rights Reserved.</p>
+            <div class="mt-2 space-x-4">
+                <!-- Updated Footer Links -->
+                <a href="#/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                <a href="#/terms" class="text-gray-400 hover:text-white">Terms of Service</a>
+                <a href="#/contact" class="text-gray-400 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Single Page Application (SPA) Routing Logic ---
+
+        const appContent = document.getElementById('app-content');
+        const defaultPageTitle = "Peekabooho - Official Website";
+
+        // Helper function for the Google Play Button (Simple design with Deep Teal color)
+        const GooglePlayButton = () => `
+            <a href="https://play.google.com/store/apps/details?id=YOUR_GAME_ID" target="_blank" 
+                class="store-button text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90"
+            >
+                <!-- Simplified Play Icon -->
+                <svg class="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 3L18 12L6 21V3Z"/>
+                </svg>
+                Google Play
+            </a>
+        `;
+
+        // Helper function for the App Store Button (Simple design with Deep Teal color)
+        const AppStoreButton = () => `
+            <a href="https://apps.apple.com/app/YOUR_GAME_ID" target="_blank" 
+                class="store-button text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90"
+            >
+                <!-- Simple Download Icon -->
+                <svg class="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+                App Store
+            </a>
+        `;
+
+        // Function to safely inject an image and handle fallbacks
+        const MascotImage = () => {
+            const imageUrl = 'https://placehold.co/200x200/B7E4F2/457B9D?text=Peekabooho+Mascot';
+            const realImageUrl = 'Assets/Images/Peekabooho/playing.png'; 
+
+            return `
+                <img 
+                    src="${realImageUrl}" 
+                    alt="Peekabooho Mascot" 
+                    class="mx-auto mb-6 w-96 h-auto"
+                    onerror="this.onerror=null; this.src='${imageUrl}';"
+                >
+            `;
+        };
+
+
+        // --- Page Templates ---
+
+        const HomePage = () => `
+            <div class="text-center py-12 md:py-24">
+                ${MascotImage()}
+                <h2 class="text-5xl font-extrabold mb-4" style="color: var(--color-brand-name);">
+                    Peekabooho
+                </h2>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
+                    The ultimate hide-and-seek adventure where shadows and light become your greatest tools. Find your friends before the clock runs out!
+                </p>
+
+                <p class="text-lg font-bold mb-8" style="color: var(--color-secondary);">
+                    Available Now on iOS and Android!
+                </p>
+
+                <!-- Store Buttons (Redone) -->
+                <div class="flex justify-center space-x-4 flex-wrap gap-4">
+                    ${GooglePlayButton()}
+                    ${AppStoreButton()}
+                </div>
+                
+                <!-- Screenshots section removed as requested -->
+            </div>
+        `;
+
+        const ContactPage = () => `
+            <div class="max-w-xl mx-auto py-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+
+                <div class="bg-white p-6 rounded-xl shadow-md mb-8 border-l-4 border-[var(--color-primary)]">
+                    <h3 class="text-xl font-semibold mb-3" style="color: var(--color-primary);">General Support & Feedback</h3>
+                    <p class="text-gray-700 mb-4">
+                        We love hearing from our players! For bug reports, suggestions, or general inquiries about <strong>Peekabooho</strong>, please reach out to our support team.
+                    </p>
+                    <p class="font-bold text-lg">
+                        Email: <a href="mailto:support@yourcompany.com" class="link-style">support@yourcompany.com</a>
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-[var(--color-secondary)]">
+                    <h3 class="text-xl font-semibold mb-3" style="color: var(--color-secondary);">Press & Business Inquiries</h3>
+                    <p class="text-gray-700 mb-4">
+                        For media inquiries, interviews, or potential business partnerships.
+                    </p>
+                    <p class="font-bold text-lg">
+                        Email: <a href="mailto:business@yourcompany.com" class="link-style">business@yourcompany.com</a>
+                    </p>
+                </div>
+            </div>
+        `;
+
+        // New dedicated Privacy Policy Page
+        const PrivacyPage = () => `
+            <div class="py-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Privacy Policy</h2>
+
+                <div class="bg-white p-6 rounded-xl shadow-md mb-8 border-l-4 border-[var(--color-primary)]">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--color-primary);">1. Our Commitment to Privacy (Last Updated: Oct 1, 2024)</h3>
+                    
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.1. No Personal Data Collected</h4>
+                    <p class="text-gray-700 mb-3">
+                        We do not collect any Personal Identifiable Information (PII) from users, such as names, email addresses, phone numbers, or precise location data. Since <strong>Peekabooho</strong> does not offer account creation or user login, there is no personal data stored on our servers.
+                    </p>
+
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.2. Non-Personal Usage Data</h4>
+                    <p class="text-gray-700 mb-3">
+                        We collect anonymous, non-personal data (e.g., game scores, session duration, device type, operating system version) solely for the purpose of improving the game, fixing bugs, and ensuring smooth performance. This data is aggregated and cannot be used to identify individual users. We use third-party services (such as Firebase Crashlytics) for diagnostic reporting under strict data processing agreements.
+                    </p>
+
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.3. Children's Privacy (COPPA)</h4>
+                    <p class="text-gray-700 mb-3">
+                        <strong>Peekabooho</strong> is not directed to children under the age of 13. If we learn that we have unintentionally collected any information from a child under 13, we will take immediate steps to delete that information from our records.
+                    </p>
+                    
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.4. Contact for Privacy Questions</h4>
+                    <p class="text-gray-700">
+                        For any questions regarding this Privacy Policy, please see our <a href="#/contact" class="link-style">Contact Page</a>.
+                    </p>
+                </div>
+            </div>
+        `;
+
+        // New dedicated Terms of Service Page
+        const TermsPage = () => `
+            <div class="py-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Terms of Service</h2>
+
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-[var(--color-secondary)]">
+                    <h3 class="text-2xl font-bold mb-4" style="color: var(--color-secondary);">1. Agreement to Terms (Last Updated: Oct 1, 2024)</h3>
+                    
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.1. Limited License (No Account Required)</h4>
+                    <p class="text-gray-700 mb-3">
+                        We grant you a personal, non-exclusive, non-transferable, revocable license to use <strong>Peekabooho</strong> solely for your personal, non-commercial entertainment purposes. Your access is tied to your device installation, not an account or user profile.
+                    </p>
+
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.2. User Conduct</h4>
+                    <p class="text-gray-700 mb-3">
+                        You agree not to cheat, modify the game code, or engage in disruptive behavior. Violations may result in the immediate revocation of your license to use the game.
+                    </p>
+                    
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.3. Intellectual Property</h4>
+                    <p class="text-gray-700 mb-3">
+                        All content, graphics, game mechanics, and the <strong>Peekabooho</strong> mascot are the exclusive property of [Your Company Name] and are protected by copyright and trademark laws.
+                    </p>
+                    
+                    <h4 class="text-xl font-semibold mt-4 mb-2 text-gray-800">1.4. Governing Law</h4>
+                    <p class="text-gray-700">
+                        These Terms shall be governed by the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+                    </p>
+                </div>
+            </div>
+        `;
+
+        // --- Routing Function ---
+
+        const routes = {
+            '/': HomePage,
+            '/contact': ContactPage,
+            '/privacy': PrivacyPage, // Updated route
+            '/terms': TermsPage    // Updated route
+        };
+
+        function renderPage() {
+            // Get the hash part of the URL (e.g., "#/contact" -> "/contact")
+            const path = window.location.hash.slice(1) || '/';
+            const renderFunction = routes[path] || HomePage; // Default to HomePage if path is unknown
+
+            appContent.innerHTML = renderFunction();
+
+            // Update document title based on the current page
+            let title = defaultPageTitle;
+            if (path === '/contact') {
+                title = "Contact | Peekabooho";
+            } else if (path === '/privacy') {
+                title = "Privacy Policy | Peekabooho";
+            } else if (path === '/terms') {
+                title = "Terms of Service | Peekabooho";
+            }
+            document.title = title;
+        }
+
+        // Listen for hash changes (navigation)
+        window.addEventListener('hashchange', renderPage);
+
+        // Initial render on page load
+        window.addEventListener('load', renderPage);
+
+    </script>
+</body>
+</html>
