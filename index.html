@@ -118,17 +118,15 @@
             </a>
         `;
 
-        // Helper function for the App Store Button (Simple design with Deep Teal color)
+        // Helper function for the App Store Button (Disabled / Coming Soon)
         const AppStoreButton = () => `
-            <a href="https://apps.apple.com/app/YOUR_GAME_ID" target="_blank" 
-                class="store-button text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90"
-            >
+            <div class="store-button text-gray-400 bg-gray-200 cursor-not-allowed border-gray-300 shadow-none hover:transform-none hover:shadow-none hover:filter-none">
                 <!-- Simple Download Icon -->
-                <svg class="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-6 h-6 mr-2 -ml-1 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                 </svg>
-                App Store
-            </a>
+                App Store (Coming Soon)
+            </div>
         `;
 
         // Function to safely inject an image and handle fallbacks
