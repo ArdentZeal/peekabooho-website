@@ -105,28 +105,18 @@
         const appContent = document.getElementById('app-content');
         const defaultPageTitle = "Peekabooho - Official Website";
 
-        // Helper function for the Google Play Button (Simple design with Deep Teal color)
+        // Helper function for the Google Play Badge
         const GooglePlayButton = () => `
-            <a href="https://play.google.com/store/apps/details?id=YOUR_GAME_ID" target="_blank" 
-                class="store-button text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90"
-            >
-                <!-- Simplified Play Icon -->
-                <svg class="w-6 h-6 mr-2 -ml-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 3L18 12L6 21V3Z"/>
-                </svg>
-                Google Play
+            <a href="https://play.google.com/store/apps/details?id=com.peekabooho.shapematch" target="_blank" class="store-badge transition hover:opacity-80">
+                <img src="Assets/Images/storebadges/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" class="h-[60px] w-auto">
             </a>
         `;
 
-        // Helper function for the App Store Button (Disabled / Coming Soon)
+        // Helper function for the App Store Badge
         const AppStoreButton = () => `
-            <div class="store-button text-gray-400 bg-gray-200 cursor-not-allowed border-gray-300 shadow-none hover:transform-none hover:shadow-none hover:filter-none">
-                <!-- Simple Download Icon -->
-                <svg class="w-6 h-6 mr-2 -ml-1 opacity-50" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                </svg>
-                App Store (Coming Soon)
-            </div>
+            <a href="https://apps.apple.com/us/app/peekabooho-perfect-match/id6757226818" target="_blank" class="store-badge transition hover:opacity-80">
+                <img src="Assets/Images/storebadges/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="Download on the App Store" class="h-[60px] w-auto">
+            </a>
         `;
 
         // Function to safely inject an image and handle fallbacks
@@ -197,9 +187,9 @@
                 </p>
 
                 <!-- Store Buttons (Redone) -->
-                <div class="flex justify-center flex-wrap gap-4">
-                    ${GooglePlayButton()}
+                <div class="flex justify-center flex-wrap gap-6 items-center">
                     ${AppStoreButton()}
+                    ${GooglePlayButton()}
                 </div>
                 
                 <!-- Screenshots section removed as requested -->
